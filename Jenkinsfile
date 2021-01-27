@@ -3,14 +3,18 @@ pipeline {
     agent none
     stages {
         stage('Fetching data from Github!') {
-            
+            agent { 
+                label 'master'
+                 }
             steps {
                 checkout scm
                 echo '====stage 1: Successfully pulled repo=='
             }
         }
         stage('Packaging of Java Project') {
-           
+            agent { 
+                label 'master'
+                 }
             steps {
                 sh 'mvn --version'
                 sh 'cd my-app && mvn clean'
