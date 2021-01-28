@@ -28,7 +28,7 @@ pipeline {
                  }
             steps {
                 withSonarQubeEnv('SonarQube'){
-                    sh '/var/lib/jenkins/workspace/HelloWorld/my-app sonar:sonar'
+                    sh './mvn SonarQube'
                 }
             }
         }     
