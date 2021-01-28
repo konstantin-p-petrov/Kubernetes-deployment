@@ -22,7 +22,7 @@ pipeline {
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
-        stage('Packaging of Java Project') {
+        stage('Checking Code via Sonar scanner') {
             agent { 
                 label 'master'
                  }
