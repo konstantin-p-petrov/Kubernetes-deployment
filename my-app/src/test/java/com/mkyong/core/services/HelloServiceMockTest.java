@@ -31,7 +31,7 @@ public class HelloServiceMockTest {
     @DisplayName("Test Mock helloService + helloRepository")
     @Test
     void testGet() {
-        assertEquals("Hello World", helloService.get());
+        assertEquals("Hello Jenkins", helloService.get());
     }
 
 }
