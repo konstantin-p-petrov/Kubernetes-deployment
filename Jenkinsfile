@@ -22,6 +22,13 @@ pipeline {
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
+
+        stage("Code Checkout from GitLab") {
+            steps {
+            git branch: 'release',
+                url: 'https://github.com/konstantin-p-petrov/Project/tree/release'
+            }
+            }
         stage('Checking Code via Sonar scanner') {
             agent { 
                 label 'master'
