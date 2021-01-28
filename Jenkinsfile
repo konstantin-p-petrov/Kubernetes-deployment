@@ -22,14 +22,26 @@ pipeline {
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
-        stage('Transfering files between OpS and ApS') {
+        stage('Packaging of Java Project') {
             agent { 
-                label 'test-slave'
-            }
+                label 'master'
+                 }
             steps {
-                sh 'scp jenkins@10.240.0.10:/var/lib/jenkins/workspace/HelloWorld/my-app/target/testing-junit5-mockito-1.0.jar jenkins@10.240.0.20:/home/jenkins'
+                withSonarQubeEnv('SonarQube'){
+                    sh '/var/lib/jenkins/workspace/HelloWorld/my-app sonar:sonar'
+                }
             }
-        }
+        }     
+
+
+       // stage('Transfering files between OpS and ApS') {
+       //     agent { 
+       //         label 'test-slave'
+       //     }
+       //     steps {
+       //         sh 'scp jenkins@10.240.0.10:/var/lib/jenkins/workspace/HelloWorld/my-app/target/testing-junit5-mockito-1.0.jar jenkins@10.240.0.20:/home/jenkins'
+       //     }
+       // }
         stage('Starting Service file') {
             agent { 
                 label 'test-slave'
