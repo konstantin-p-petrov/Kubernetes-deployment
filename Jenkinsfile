@@ -28,7 +28,7 @@ pipeline {
                  }
             steps {
                 withSonarQubeEnv('SonarQube'){
-                    sh './mvn SonarQube'
+                    sh 'cd my-app && sonar-scanner'
                 }
             }
         }     
