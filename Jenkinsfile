@@ -27,8 +27,15 @@ pipeline {
                 label 'master'
                  }
             steps {
-                withSonarQubeEnv('SonarQube'){
-                    sh 'cd my-app && sonar-scanner'
+                script {
+                def scannerHome = tool 'sonarqube';
+                    withSonarQubeEnv("SonarQube") {
+                    sh "${tool("sonarqube")}/opt/sonarscanner \
+                    -Dsonar.projectKey=test \
+                    -Dsonar.sources=. \
+                    -Dsonar.css.node=. \
+                    -Dsonar.host.url=http://http://10.240.0.10:9000"
+                    }
                 }
             }
         }     
