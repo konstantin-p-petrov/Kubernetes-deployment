@@ -22,28 +22,15 @@ pipeline {
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
-        stage("Code Checkout from Github") {
-            agent { 
-                label 'master'
-                 }
-            steps {
-            git branch: 'release',
-                url: 'https://github.com/konstantin-p-petrov/Project/'
-            }
-        }
+        
         stage('Checking Code via Sonar scanner') {
             agent { 
                 label 'master'
                  }
             steps {
                 script {
-                def scannerHome = tool 'SonarQube';
                     withSonarQubeEnv("SonarQube") {
-                    sh "${tool("sonarqube")}/opt/sonarscanner \
-                    -Dsonar.projectKey=test \
-                    -Dsonar.sources=. \
-                    -Dsonar.css.node=. \
-                    -Dsonar.host.url=http://http://10.240.0.10:9000"
+                    sh "cd my-app && mvn sonar:sonar -Dsonar.host.url=http://10.240.0.10:9000 -Dsonar.login=26e31db0e12146c1e30d1b5095b6e36a149b77ca"
                     }
                 }
             }
