@@ -23,6 +23,9 @@ pipeline {
             }
         }
         stage("Code Checkout from Github") {
+            agent { 
+                label 'master'
+                 }
             steps {
             git branch: 'release',
                 url: 'https://github.com/konstantin-p-petrov/Project/'
