@@ -2,7 +2,7 @@
 pipeline {
     agent none
     stages {
-        stage('Fetching data from Github!') {
+        stage('Checkout Code') {
             agent { 
                 label 'master'
                  }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv("SonarQube") {
-                    sh "cd my-app && mvn sonar:sonar -Dsonar.host.url=http://10.240.0.10:9000 -Dsonar.login=26e31db0e12146c1e30d1b5095b6e36a149b77ca"
+                    sh "cd my-app && mvn sonar:sonar -Dsonar.host.url= http://48fee1285478.ngrok.io:9000 -Dsonar.login=26e31db0e12146c1e30d1b5095b6e36a149b77ca"
                     }
                 }
             }

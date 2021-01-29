@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mkyong.core.controller.MainControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.877 s - in com.mkyong.core.controller.MainControllerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.06 s - in com.mkyong.core.controller.MainControllerTest
