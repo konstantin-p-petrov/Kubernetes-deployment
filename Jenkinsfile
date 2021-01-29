@@ -35,15 +35,15 @@ pipeline {
                 }
             }
         }     
-        //test
-       // stage('Transfering files between OpS and ApS') {
-       //     agent { 
-       //         label 'test-slave'
-       //     }
-       //     steps {
-       //         sh 'scp jenkins@10.240.0.10:/var/lib/jenkins/workspace/HelloWorld/my-app/target/testing-junit5-mockito-1.0.jar jenkins@10.240.0.20:/home/jenkins'
-       //     }
-       // }
+
+       stage('Transfering files between OpS and ApS') {
+           agent { 
+               label 'test-slave'
+           }
+           steps {
+               sh 'scp jenkins@10.240.0.10:/var/lib/jenkins/workspace/HelloWorld/my-app/target/testing-junit5-mockito-1.0.jar jenkins@10.240.0.20:/home/jenkins'
+           }
+       }
         stage('Starting Service file') {
             agent { 
                 label 'test-slave'
