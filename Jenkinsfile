@@ -35,8 +35,7 @@ pipeline {
                 }
             }
         }     
-
-
+        //test
        // stage('Transfering files between OpS and ApS') {
        //     agent { 
        //         label 'test-slave'
