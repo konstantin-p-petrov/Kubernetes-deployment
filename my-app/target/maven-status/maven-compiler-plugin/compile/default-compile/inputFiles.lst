@@ -1,6 +1,6 @@
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/controller/MainController.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/repository/HelloRepository.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/StartApplication.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/repository/HelloRepositoryImpl.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/services/HelloService.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/main/java/com/mkyong/core/services/HelloServiceImpl.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/services/HelloService.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/services/HelloServiceImpl.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/controller/MainController.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/repository/HelloRepository.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/StartApplication.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/main/java/com/mkyong/core/repository/HelloRepositoryImpl.java

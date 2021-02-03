@@ -1,3 +1,3 @@
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/test/java/com/mkyong/core/services/HelloServiceTest.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/test/java/com/mkyong/core/controller/MainControllerTest.java
-/home/scalefocus.com/konstantin.ppetrov/Project/my-app/src/test/java/com/mkyong/core/services/HelloServiceMockTest.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/test/java/com/mkyong/core/controller/MainControllerTest.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/test/java/com/mkyong/core/services/HelloServiceMockTest.java
+/var/lib/jenkins/workspace/HelloWorld/my-app/src/test/java/com/mkyong/core/services/HelloServiceTest.java

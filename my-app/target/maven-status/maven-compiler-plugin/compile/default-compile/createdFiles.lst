@@ -1,6 +1,6 @@
 com/mkyong/core/controller/MainController.class
-com/mkyong/core/services/HelloServiceImpl.class
 com/mkyong/core/repository/HelloRepository.class
-com/mkyong/core/services/HelloService.class
+com/mkyong/core/services/HelloServiceImpl.class
 com/mkyong/core/StartApplication.class
+com/mkyong/core/services/HelloService.class
 com/mkyong/core/repository/HelloRepositoryImpl.class
