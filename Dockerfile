@@ -1,12 +1,12 @@
-FROM ubuntu:18.04
+FROM alpine
 
 COPY my-app/target/testing-junit5-mockito-1.0.jar .
 
-RUN apt-get update \
+RUN apk update \
    
-    && apt install default-jdk -y
+    && apk add openjdk11 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
-   
+EXPOSE 8080   
     
 
 CMD java -jar testing-junit5-mockito-1.0.jar
