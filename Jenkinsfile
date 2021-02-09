@@ -1,5 +1,9 @@
 
 pipeline {
+    environment {
+        registry = "konstantinnn/test-app"
+        registryCredential = 'docker-credentials'
+        }
     agent none
     stages {
         stage('Fetching data from Github!') {
@@ -36,23 +40,20 @@ pipeline {
             }
         }     
 
-       stage('Transfering files between OpS and ApS') {
-           agent { 
-               label 'test-slave'
-           }
-           steps {
-               sh 'scp jenkins@10.240.0.10:/var/lib/jenkins/workspace/HelloWorld/my-app/target/testing-junit5-mockito-1.0.jar jenkins@10.240.0.20:/home/jenkins'
-           }
-       }
-        stage('Starting Service file') {
+        stage('Build a container image and push it to Docker Hub') {
             agent { 
-                label 'test-slave'
-            }
+                label 'master'
+                 }
             steps {
-                sh 'sudo systemctl stop myapp.service'
-                sh 'sudo systemctl start myapp.service'
-                sh 'sudo systemctl status myapp.service'
+                script {
+                        docker.withRegistry( '', registryCredential )
+                        docker.build registry + ":$BUILD_NUMBER"
+                        dockerImage.push()
+                }
             }
-        }
+        }     
+
+
+      
     }
 }
