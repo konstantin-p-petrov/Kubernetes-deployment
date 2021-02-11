@@ -61,9 +61,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential){
-                        image = docker.image('konstantinnn/my-app:latest')
-                        image.pull()   
-                        
+                        sh 'docker pull konstantinnn/my-app:latest'
+
                     }
                 }
             }
