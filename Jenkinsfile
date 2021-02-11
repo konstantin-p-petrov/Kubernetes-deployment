@@ -10,9 +10,8 @@ pipeline {
                 label 'master'
                  }
             steps {
-                checkout scm
                 script{
-                    sh 'git pull origin release'
+                    sh 'cd workspace/Project && git pull origin release'
                 }
                 echo '====stage 1: Successfully pulled repo=='
             }
@@ -48,6 +47,7 @@ pipeline {
                  }
             steps {
                 script {
+                    sh 'docker image rm konstantinnn/my-app'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         test_image.push('latest')
