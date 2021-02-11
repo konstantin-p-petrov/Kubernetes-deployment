@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential){
-                        sh 'docker pull konstantinnn/my-app'
+                        sh 'docker pull konstantinnn/my-app:latest'
 
                     }
                 }
