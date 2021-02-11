@@ -1,8 +1,7 @@
-
 pipeline {
     environment {
-        registry = "konstantinnn/test-app"
-        registryCredential = 'docker-credentials'
+        registry = "konstantinnn/my-app"
+        registryCredential = "docker-credentials"
         }
     agent none
     stages {
@@ -12,6 +11,9 @@ pipeline {
                  }
             steps {
                 checkout scm
+                script{
+                    sh 'git pull origin release'
+                }
                 echo '====stage 1: Successfully pulled repo=='
             }
         }
@@ -40,20 +42,46 @@ pipeline {
             }
         }     
 
-        stage('Build a container image and push it to Docker Hub') {
+        stage('Build a container image and push it to Docker Private Repo') {
             agent { 
                 label 'master'
                  }
             steps {
                 script {
-                        docker.withRegistry( '', registryCredential )
-                        docker.build registry + ":$BUILD_NUMBER"
-                        dockerImage.push()
+                    docker.withRegistry('', registryCredential){
+                        def test_image = docker.build registry
+                        test_image.push('latest')
+                    }
                 }
             }
         }     
 
-
+        stage('Pull container image from Docker Private Repo') {
+            agent { 
+                label 'Test-Slave'
+                 }
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential){
+                        image = docker.image('konstantinnn/my-app:latest')
+                        image.pull()   
+                        
+                    }
+                }
+            }
+        } 
       
+      stage('Running the container') {
+            agent { 
+                label 'Test-Slave'
+                 }
+            steps {
+                script {
+                    sh "docker rm -f test"
+                    sh "docker run -dp 8080:8080 --name test konstantinnn/my-app:latest"
+                    }
+            }
+                
+        }
     }
 }
