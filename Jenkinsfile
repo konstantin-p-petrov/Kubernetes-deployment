@@ -10,9 +10,7 @@ pipeline {
                 label 'master'
                  }
             steps {
-                script{
-                    sh 'cd workspace/Project && git pull origin release'
-                }
+                checkout scm
                 echo '====stage 1: Successfully pulled repo=='
             }
         }
