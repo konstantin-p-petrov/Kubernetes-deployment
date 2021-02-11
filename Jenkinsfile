@@ -45,7 +45,7 @@ pipeline {
                  }
             steps {
                 script {
-                    sh 'docker image rm konstantinnn/my-app'
+                    //sh 'docker image rm konstantinnn/my-app'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         test_image.push('latest')
