@@ -46,6 +46,7 @@ pipeline {
             steps {
                 script {
                     //sh 'docker builder prune -f'
+                    sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
                     sh 'docker rmi -f $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
@@ -63,7 +64,9 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f test"
+
                     sh 'docker rm -vf $(docker ps -a -q)'
+                    sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
                     sh 'docker rmi -f $(docker images -a -q)'
 
                     //sh 'docker builder prune -f'
