@@ -21,8 +21,7 @@ pipeline {
             steps {
                 script {
                     withMaven {
-                        sh 'mvn --version'
-                        sh 'cd my-app && mvn clean verify'
+                    sh 'cd my-app && mvn clean'
                     }
                 }
                 
