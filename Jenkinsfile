@@ -49,7 +49,7 @@ pipeline {
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        test_image.push("${env.BUILD_ID}")
+                        test_image.push("latest")
                     }
                 }
             }
@@ -64,7 +64,7 @@ pipeline {
                     sh "docker rm -f test"
                     sh 'docker image prune -a -f'
                     docker.withRegistry('', registryCredential){
-                        sh "docker pull ${registry}:${env.BUILD_ID}"
+                        sh "docker pull ${registry}:latest"
                     }
                 }
             }
