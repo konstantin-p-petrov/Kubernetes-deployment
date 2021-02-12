@@ -19,10 +19,9 @@ pipeline {
                 label 'master'
                  }
             steps {
-                script {
-                    withMaven(maven : 'apache-maven-3.6.0') {
-                    sh "cd my-app && mvn clean package"
-                    }
+            
+                sh "cd my-app && rm -rf target"
+                    
                 }
                 
                // sh 'cd my-app && mvn package'
@@ -51,7 +50,7 @@ pipeline {
             steps {
                 script {
                    // sh 'docker builder prune -f'
-                    sh 'docker rmi -f $(docker images -a -q)'
+                    //sh 'docker rmi -f $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         //sh "docker tag ${env.BUILD_ID} ${registry}"
