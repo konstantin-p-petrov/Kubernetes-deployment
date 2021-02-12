@@ -28,6 +28,7 @@ pipeline {
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
                         sh "docker push ${registry}:latest"
+                    }
                 }
                 //sh "rm -rf my-app/target/"
                 
