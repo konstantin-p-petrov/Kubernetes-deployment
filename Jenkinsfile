@@ -21,10 +21,10 @@ pipeline {
                  }
             steps {
             
-                //sh "rm -rf my-app/target/"
+                sh "rm -rf my-app/target/"
                 
-                sh 'cd my-app && mvn package'
-                //test
+                //sh 'cd my-app && mvn package'
+    
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
