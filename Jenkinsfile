@@ -21,7 +21,7 @@ pipeline {
                  }
             steps {
             
-                sh "rm -rf my-app/target"
+                sh "rm -rf my-app/target/"
                 
                // sh 'cd my-app && mvn package'
                 //test
