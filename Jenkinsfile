@@ -45,7 +45,7 @@ pipeline {
                  }
             steps {
                 script {
-                    sh 'docker image prune -a -f'
+                    sh 'docker system prune -a -f'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
