@@ -1,5 +1,5 @@
 pipeline {
-    
+
     environment {
         registry = "konstantinnn/my-app"
         registryCredential = "docker-credentials"
@@ -22,8 +22,6 @@ pipeline {
             steps {
             
                 sh "rm -rf my-app/target"
-                    
-                }
                 
                // sh 'cd my-app && mvn package'
                 //test
@@ -86,7 +84,6 @@ pipeline {
                  }
             steps {
                 script {
-                    
                     sh "docker run -dp 8080:8080 --name test ${registry}:latest"
                     }
             }
