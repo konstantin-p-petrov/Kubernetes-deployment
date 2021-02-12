@@ -62,6 +62,7 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f test"
+                    sh "docker container prune -f"
                     sh 'docker image prune -a -f'
                     docker.withRegistry('', registryCredential){
                         sh "docker pull ${registry}:latest"
