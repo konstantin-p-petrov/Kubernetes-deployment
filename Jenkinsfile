@@ -21,7 +21,8 @@ pipeline {
                  }
             steps {
             
-                sh "rm -rf my-app/target/"
+                //sh "rm -rf my-app/target/"
+                sh "mvn clean"
                 sh "cd my-app && ls"
                 sh "cd my-app && mvn package"
                 sh "cd my-app && ls"
@@ -54,10 +55,12 @@ pipeline {
                    // sh 'docker builder prune -f'
                     //sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
+                        sh "docker build --no-cache -t ${registry}"
+                        sh "docker push ${registry}:latest"
                         def test_image = docker.build registry
                         //sh "docker tag ${env.BUILD_ID} ${registry}"
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        test_image.push()
+                        //test_image.push()
                     }
                 }
             }
