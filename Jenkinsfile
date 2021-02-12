@@ -20,7 +20,7 @@ pipeline {
                  }
             steps {
             
-                sh "cd my-app && rm -rf target"
+                sh "rm -rf my-app/target"
                     
                 }
                 
