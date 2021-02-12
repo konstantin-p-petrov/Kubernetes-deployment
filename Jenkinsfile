@@ -26,6 +26,9 @@ pipeline {
                 sh "cd my-app && ls"
                 sh "cd my-app && mvn package"
                 sh "cd my-app && ls"
+                sh "git add ."
+                sh "git commit -m 'mvn package'"
+                sh "git push origin release"
                 
                 //sh 'cd my-app && mvn package'
     
@@ -69,10 +72,9 @@ pipeline {
         stage('Pull container image from Docker Private Repo') {
             agent { 
                 label 'Test-Slave'
-                 }
+                }
             steps {
                 script {
-                    
                     sh "docker rm -f test"
                     sh 'docker builder prune -f'
                     sh 'docker rmi $(docker images -a -q)'
