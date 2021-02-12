@@ -23,6 +23,8 @@ pipeline {
             
                 sh "rm -rf my-app/target/"
                 sh "cd my-app && ls"
+                sh "cd my-app && mvn package"
+                sh "cd my-app && ls"
                 
                 //sh 'cd my-app && mvn package'
     
