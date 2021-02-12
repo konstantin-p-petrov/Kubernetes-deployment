@@ -55,7 +55,7 @@ pipeline {
                    // sh 'docker builder prune -f'
                     //sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
-                        sh "docker build --no-cache -t ${registry}"
+                        sh "docker build --no-cache -t ${registry} ."
                         sh "docker push ${registry}:latest"
                         def test_image = docker.build registry
                         //sh "docker tag ${env.BUILD_ID} ${registry}"
