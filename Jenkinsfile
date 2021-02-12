@@ -49,7 +49,7 @@ pipeline {
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        test_image.push("latest")
+                        test_image.push()
                     }
                 }
             }
@@ -77,7 +77,7 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker run -dp 8080:8080 --name test ${registry}:${env.BUILD_ID}"
+                    sh "docker run -dp 8080:8080 --name test ${registry}"
                     }
             }
                 
