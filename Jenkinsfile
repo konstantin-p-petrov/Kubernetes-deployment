@@ -22,7 +22,7 @@ pipeline {
             steps {
             
                 //sh "rm -rf my-app/target/"
-                sh "mvn clean"
+                sh "cd my-app && mvn clean"
                 sh "cd my-app && ls"
                 sh "cd my-app && mvn package"
                 sh "cd my-app && ls"
