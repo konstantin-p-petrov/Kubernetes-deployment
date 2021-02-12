@@ -49,7 +49,7 @@ pipeline {
                     
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
-                        sh "docker tag ${env.BUILD_ID} ${registry}"
+                        //sh "docker tag ${env.BUILD_ID} ${registry}"
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
                         test_image.push()
                     }
@@ -71,7 +71,7 @@ pipeline {
 
                     //sh 'docker builder prune -f'
                     docker.withRegistry('', registryCredential){
-                        sh "docker pull ${registry}:${env.BUILD_ID}"
+                        sh "docker pull ${registry}:latest"
                     }
                 }
             }
@@ -84,7 +84,7 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker run -dp 8080:8080 --name test ${registry}:${env.BUILD_ID}"
+                    sh "docker run -dp 8080:8080 --name test ${registry}:latest"
                     }
             }
                 
