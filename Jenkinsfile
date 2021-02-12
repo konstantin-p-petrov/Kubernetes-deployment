@@ -45,11 +45,11 @@ pipeline {
                  }
             steps {
                 script {
-                    //sh 'docker builder prune -f'
-                    sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-                    sh 'docker rmi -f $(docker images -a -q)'
+                    sh 'docker builder prune -f'
+                    
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
+                        sh "docker tag ${env.BUILD_ID} registry"
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
                         test_image.push()
                     }
@@ -65,13 +65,13 @@ pipeline {
                 script {
                     sh "docker rm -f test"
 
-                    sh 'docker rm -vf $(docker ps -a -q)'
-                    sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-                    sh 'docker rmi -f $(docker images -a -q)'
+                    //sh 'docker rm -vf $(docker ps -a -q)'
+                    //sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+                    //sh 'docker rmi -f $(docker images -a -q)'
 
                     //sh 'docker builder prune -f'
                     docker.withRegistry('', registryCredential){
-                        sh "docker pull ${registry}:latest"
+                        sh "docker pull ${registry}:${env.BUILD_ID}"
                     }
                 }
             }
@@ -84,7 +84,7 @@ pipeline {
             steps {
                 script {
                     
-                    sh "docker run -dp 8080:8080 --name test ${registry}"
+                    sh "docker run -dp 8080:8080 --name test ${registry}:${env.BUILD_ID}"
                     }
             }
                 
