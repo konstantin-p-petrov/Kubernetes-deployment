@@ -22,6 +22,7 @@ pipeline {
             steps {
             
                 sh "rm -rf my-app/target/"
+                sh "cd my-app && pwd"
                 
                 //sh 'cd my-app && mvn package'
     
