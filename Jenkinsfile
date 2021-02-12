@@ -49,7 +49,7 @@ pipeline {
                     
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
-                        sh "docker tag ${env.BUILD_ID} registry"
+                        sh "docker tag ${env.BUILD_ID} ${registry}"
                         //def test_image = docker.build("${registry}:${env.BUILD_ID}")
                         test_image.push()
                     }
