@@ -21,7 +21,8 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'cd my-app && mvn clean'
-                sh 'cd my-app && mvn clean package'
+                sh 'cd my-app && mvn install'
+                //test
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
