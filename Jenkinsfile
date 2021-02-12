@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f test"
-                    sh "docker run -dp 8080:8080 --name test konstantinnn/my-app:latest"
+                    sh "docker run -dp 8080:8080 --name test ${registry}:${env.BUILD_ID}"
                     }
             }
                 
