@@ -61,7 +61,8 @@ pipeline {
                  }
             steps {
                 script {
-                    sh 'docker builder prune -f'
+                    sh 'docker image prune -a -f'
+
                     docker.withRegistry('', registryCredential){
                         sh "docker pull ${registry}:${env.BUILD_ID}"
                     }
