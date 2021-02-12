@@ -47,9 +47,9 @@ pipeline {
                 script {
                     //sh 'docker image rm konstantinnn/my-app'
                     docker.withRegistry('', registryCredential){
-                        //def test_image = docker.build registry
-                        def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        test_image.push('latest')
+                        def test_image = docker.build registry
+                        //def test_image = docker.build("${registry}:${env.BUILD_ID}")
+                        test_image.push('${env.BUILD_ID}')
                     }
                 }
             }
@@ -62,8 +62,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential){
-                        def image = ("${registry}:${env.BUILD_ID}")
-                        sh 'docker pull ${image}:latest'
+                        def image = ("${registry}")
+                        sh 'docker pull ${image}:${env.BUILD_ID}'
 
                     }
                 }
