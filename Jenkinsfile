@@ -62,8 +62,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', registryCredential){
-                        sh 'docker pull ${registry}:${env.BUILD_ID}'
-
+                        sh "docker pull ${registry}:${env.BUILD_ID}"
                     }
                 }
             }
