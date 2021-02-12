@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'cd my-app && mvn clean'
-                sh 'cd my-app && mvn package'
+                sh 'cd my-app && mvn clean package'
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                    // sh 'docker builder prune -f'
-                   // sh 'docker rmi -f $(docker images -a -q)'
+                    sh 'docker rmi -f $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         def test_image = docker.build registry
                         //sh "docker tag ${env.BUILD_ID} ${registry}"
@@ -64,11 +64,11 @@ pipeline {
             steps {
                 script {
                     //sh 'docker builder prune -f'
-                    //sh "docker rm -f test"
+                    sh "docker rm -f test"
 
                     //sh 'docker rm -vf $(docker ps -a -q)'
                     //sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-                    //sh 'docker rmi -f $(docker images -a -q)'
+                    sh 'docker rmi -f $(docker images -a -q)'
 
                     //sh 'docker builder prune -f'
                     docker.withRegistry('', registryCredential){
