@@ -45,11 +45,11 @@ pipeline {
                  }
             steps {
                 script {
-                    sh 'docker builder prune -f'
+                    //sh 'docker builder prune -f'
                     docker.withRegistry('', registryCredential){
-                        def test_image = docker.build registry
-                        //def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        test_image.push()
+                        //def test_image = docker.build registry
+                        def test_image = docker.build("${registry}")
+                        test_image.push(${env.BUILD_ID})
                     }
                 }
             }
@@ -62,10 +62,10 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f test"
-                    sh "docker container prune -f"
-                    sh 'docker builder prune -f'
+                    
+                    //sh 'docker builder prune -f'
                     docker.withRegistry('', registryCredential){
-                        sh "docker pull ${registry}:latest"
+                        sh "docker pull ${registry}:${env.BUILD_ID}"
                     }
                 }
             }
