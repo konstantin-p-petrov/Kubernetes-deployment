@@ -20,8 +20,8 @@ pipeline {
                  }
             steps {
                 script {
-                    withMaven {
-                    sh 'cd my-app && mvn clean'
+                    withMaven(maven : 'apache-maven-3.6.0') {
+                    sh "cd my-app && mvn clean"
                     }
                 }
                 
