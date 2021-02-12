@@ -19,8 +19,10 @@ pipeline {
                 label 'master'
                  }
             steps {
+                withMaven {
                 sh 'mvn --version'
-                sh 'cd my-app && mvn clean'
+                sh 'cd my-app && mvn clean verify'
+                }
                // sh 'cd my-app && mvn package'
                 //test
                 echo '====stage 1: Successfully tested and packed Java Web Application===='
