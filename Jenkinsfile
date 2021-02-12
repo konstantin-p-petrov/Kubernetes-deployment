@@ -63,8 +63,8 @@ pipeline {
                  }
             steps {
                 script {
-                    sh 'docker builder prune -f'
-                    sh "docker rm -f test"
+                    //sh 'docker builder prune -f'
+                    //sh "docker rm -f test"
 
                     //sh 'docker rm -vf $(docker ps -a -q)'
                     //sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
