@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f test"
-                    //sh 'docker image prune -a -f'
+                    sh 'docker image prune -a -f'
                     sh "docker run -dp 8080:8080 --name test ${registry}:${env.BUILD_ID}"
                     }
             }
