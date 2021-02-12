@@ -20,15 +20,17 @@ pipeline {
                 label 'master'
                  }
             steps {
-            
+                script {
+                    sh "cd my-app && mvn clean"
+                    sh "cd my-app && ls"
+                    sh "cd my-app && mvn package"
+                    sh "cd my-app && ls"
+                    docker.withRegistry('', registryCredential){
+                        sh "docker build -t ${registry} ."
+                        sh "docker push ${registry}:latest"
+                }
                 //sh "rm -rf my-app/target/"
-                sh "cd my-app && mvn clean"
-                sh "cd my-app && ls"
-                sh "cd my-app && mvn package"
-                sh "cd my-app && ls"
-                sh "git add ."
-                sh "git commit -m 'mvn package'"
-                sh "git push origin release"
+                
                 
                 //sh 'cd my-app && mvn package'
     
@@ -49,25 +51,25 @@ pipeline {
             }
         }     
 
-        stage('Build a container image and push it to Docker Private Repo') {
-            agent { 
-                label 'master'
-                 }
-            steps {
-                script {
-                   // sh 'docker builder prune -f'
-                    //sh 'docker rmi $(docker images -a -q)'
-                    docker.withRegistry('', registryCredential){
-                        sh "docker build --no-cache -t ${registry} ."
-                        sh "docker push ${registry}:latest"
-                        def test_image = docker.build registry
-                        //sh "docker tag ${env.BUILD_ID} ${registry}"
-                        //def test_image = docker.build("${registry}:${env.BUILD_ID}")
-                        //test_image.push()
-                    }
-                }
-            }
-        }     
+        // stage('Build a container image and push it to Docker Private Repo') {
+        //     agent { 
+        //         label 'master'
+        //          }
+        //     steps {
+        //         script {
+        //            // sh 'docker builder prune -f'
+        //             //sh 'docker rmi $(docker images -a -q)'
+        //             docker.withRegistry('', registryCredential){
+        //                 sh "docker build --no-cache -t ${registry} ."
+        //                 sh "docker push ${registry}:latest"
+        //                 def test_image = docker.build registry
+        //                 //sh "docker tag ${env.BUILD_ID} ${registry}"
+        //                 //def test_image = docker.build("${registry}:${env.BUILD_ID}")
+        //                 //test_image.push()
+        //             }
+        //         }
+        //     }
+        // }     
 
         stage('Pull container image from Docker Private Repo') {
             agent { 
