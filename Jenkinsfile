@@ -15,6 +15,7 @@ pipeline {
                 echo '====stage 1: Successfully pulled repo=='
             }
         }
+
         stage('Packaging of Java Project && creating a image && push it to DockerHub') {
             agent { 
                 label 'master'
@@ -25,13 +26,13 @@ pipeline {
                     sh "cd my-app && ls"
                     sh "cd my-app && mvn package"
                     sh "cd my-app && ls"
+                    sh 'docker builder prune -f'
+                    sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
                         sh "docker push ${registry}:latest"
                     }
                 }
-                
-    
             }
         }
         
@@ -47,9 +48,7 @@ pipeline {
                 }
             }
         }     
-
        
-
         stage('Pull container image from Docker Private Repo') {
             agent { 
                 label 'Test-Slave'
@@ -75,8 +74,7 @@ pipeline {
                 script {
                     sh "docker run -dp 8080:8080 --name test ${registry}:latest"
                     }
-            }
-                
+            }    
         }
     }
 }
