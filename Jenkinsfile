@@ -26,7 +26,7 @@ pipeline {
                     sh "cd my-app && ls"
                     sh "cd my-app && mvn package"
                     sh "cd my-app && ls"
-                    //sh 'docker builder prune -f'
+                    // sh 'docker builder prune -f'
                     //sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
