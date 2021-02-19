@@ -27,7 +27,7 @@ pipeline {
                     sh "cd my-app && mvn package"
                     sh "cd my-app && ls"
                     // sh 'docker builder prune -f'
-                    //sh 'docker rmi $(docker images -a -q)'
+                    // sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
                         sh "docker push ${registry}:latest"
@@ -54,9 +54,9 @@ pipeline {
                 label 'master-slave'
                 }
             steps {
-               sh 'kubectl apply -f prod-env.yaml -n prod'
-               sh 'kubectl get pods -n prod'
-               sh 'kubectl get services -o wide -n prod'
+               sh 'sudo kubectl apply -f prod-env.yaml -n prod'
+               sh 'sudo kubectl get pods -n prod'
+               sh 'sudo kubectl get services -o wide -n prod'
             }
         } 
     }
