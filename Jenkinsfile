@@ -51,7 +51,7 @@ pipeline {
        
         stage('Pull container image from Docker Private Repo in Dev Env') {
             agent { 
-                label 'Master-Slave'
+                label 'master-slave'
                 }
             steps {
                sh 'kubectl apply -f prod-env.yaml -n prod'
