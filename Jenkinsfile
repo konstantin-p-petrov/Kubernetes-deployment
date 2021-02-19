@@ -59,4 +59,5 @@ pipeline {
                sh 'kubectl get services -o wide -n prod'
             }
         } 
+    }
 }
