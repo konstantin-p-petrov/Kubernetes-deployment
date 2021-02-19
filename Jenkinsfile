@@ -26,7 +26,7 @@ pipeline {
                     sh "cd my-app && ls"
                     sh "cd my-app && mvn package"
                     sh "cd my-app && ls"
-                    sh 'docker builder prune -f'
+                    // sh 'docker builder prune -f'
                     //sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
@@ -49,32 +49,15 @@ pipeline {
             }
         }     
        
-        stage('Pull container image from Docker Private Repo') {
+        stage('Pull container image from Docker Private Repo in Dev Env') {
             agent { 
-                label 'Test-Slave'
+                label 'Master-Slave'
                 }
             steps {
-                script {
-                    sh "docker rm -f test"
-                    sh 'docker builder prune -f'
-                    //sh 'docker rmi $(docker images -a -q)'
-                    
-                    docker.withRegistry('', registryCredential){
-                        sh "docker pull ${registry}:latest"
-                    }
-                }
+               sh 'kubectl apply -f prod-env.yaml -n prod'
+               sh 'kubectl get pods -n prod'
+               sh 'kubectl get services -o wide -n prod'
             }
         } 
-      
-      stage('Running the container') {
-            agent { 
-                label 'Test-Slave'
-                 }
-            steps {
-                script {
-                    sh "docker run -dp 8080:8080 --name test ${registry}:latest"
-                    }
-            }    
-        }
-    }
+    
 }
