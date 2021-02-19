@@ -54,11 +54,9 @@ pipeline {
                 label 'master-slave'
                 }
             steps {
-               sh 'echo HELLO'
-               sh 'whoami'
-               sh 'kubectl apply -f /home/vagrant/prod-env.yaml -n prod'
-               sh 'kubectl get pods -n prod'
-               sh 'kubectl get services -o wide -n prod'
+               sh 'sudo kubectl apply -f /home/vagrant/prod-env.yaml -n prod'
+               sh 'sudo kubectl get pods -n prod'
+               sh 'sudo kubectl get services -o wide -n prod'
             }
         } 
     }
