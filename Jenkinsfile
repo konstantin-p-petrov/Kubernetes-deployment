@@ -55,9 +55,10 @@ pipeline {
                 }
             steps {
                sh 'echo HELLO'
-               sh 'sudo kubectl apply -f prod-env.yaml -n prod'
-               sh 'sudo kubectl get pods -n prod'
-               sh 'sudo kubectl get services -o wide -n prod'
+               sh 'sudo su'
+               sh 'kubectl apply -f prod-env.yaml -n prod'
+               sh 'kubectl get pods -n prod'
+               sh 'kubectl get services -o wide -n prod'
             }
         } 
     }
