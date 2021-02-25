@@ -6,15 +6,16 @@ pipeline {
         }
     agent none
     stages {
-        // stage('Fetching data from Github!') {
-        //     agent { 
-        //         label 'master'
-        //          }
-        //     steps {
-        //         checkout scm
-        //         echo '====stage 1: Successfully pulled repo=='
-        //     }
-        // }
+
+        stage('Fetching data from Github!') {
+            agent { 
+                label 'master'
+                 }
+            steps {
+                checkout scm
+                echo '====stage 1: Successfully pulled repo=='
+            }
+        }
 
         // stage('Packaging of Java Project && creating a image && push it to DockerHub') {
         //     agent { 
@@ -49,16 +50,4 @@ pipeline {
         //     }
         // }     
        
-        stage('Pull container image from Docker Private Repo in Dev Env') {
-            agent { 
-                label 'master-slave'
-                }
-            steps {
-               sh 'kubectl delete -f /home/vagrant/prod-env.yaml -n prod' 
-               sh 'kubectl apply -f /home/vagrant/prod-env.yaml -n prod'
-               sh 'kubectl get pods -n prod'
-               sh 'kubectl get services -o wide -n prod'
-            }
-        } 
-    }
-}
+
