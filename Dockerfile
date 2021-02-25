@@ -1,5 +1,5 @@
 
-FROM jre-11.0.10_9-alpine
+FROM adoptopenjdk/jre-11.0.10_9-alpine
 
 COPY my-app/target/testing-junit5-mockito-1.0.jar .
 
