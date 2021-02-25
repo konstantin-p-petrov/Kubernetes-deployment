@@ -6,6 +6,7 @@ pipeline {
         }
     agent none
     stages {
+
         stage('Fetching data from Github!') {
             agent { 
                 label 'master'
@@ -49,23 +50,4 @@ pipeline {
         //     }
         // }     
        
-        stage('Run application in Kubernetes Prod Env') {
-            agent { 
-                label 'master-slave'
-                }
-            steps {
-                script {
-                    DEPLOYMENT = sh (script: 'kubectl get deployment -n production | grep -o my-app', returnStdout: true).trim()
 
-                    if ( DEPLOYMENT == 'my-app') {
-                        echo 'Entered in the if'
-                        sh 'kubectl delete -f /home/vagrant/my-app-prod.yaml -n production'
-                    } 
-                        sh 'kubectl apply -f /home/vagrant/my-app-prod.yaml -n production'
-                        sh 'kubectl get pods -n production'
-                        sh 'kubectl get services -o wide -n production'
-                }           
-            }
-        } 
-    }
-}
