@@ -55,10 +55,9 @@ pipeline {
                 }
             steps {
                     sh 'kubectl apply -f /home/vagrant/my-app-dev.yaml -n development'
-                    sj 'kubectl set image deployment/my-app my-app=konstantinnn/my-app:latest -n development'
-                    sh 'kubectl get pods -n development'
-                }           
+                    sh 'kubectl set image deployment/my-app my-app=konstantinnn/my-app:latest -n development'
+                    sh 'kubectl get pods -n development'           
             }
-        } 
+        }
     }
 }
