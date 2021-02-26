@@ -29,7 +29,9 @@ pipeline {
                     // sh 'docker builder prune -f'
                     // sh 'docker rmi $(docker images -a -q)'
                     docker.withRegistry('', registryCredential){
-                        sh "docker build -t ${registry} ."
+                        sh "docker build -t ${registry}:${currentBuild.number} ."
+                        sh "docker tag ${registry}:${currentBuild.number} latest"
+
                         sh "docker push ${registry}:latest"
                         sh "docker push ${registry}:${currentBuild.number}"
                     }
