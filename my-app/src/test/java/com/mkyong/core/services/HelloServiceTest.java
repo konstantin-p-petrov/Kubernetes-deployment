@@ -17,7 +17,7 @@ public class HelloServiceTest {
     @DisplayName("Test Spring @Autowired Integration")
     @Test
     void testGet() {
-        assertEquals("Hello Stani", helloService.get());
+        assertEquals("Hello World", helloService.get());
     }
 
 }
