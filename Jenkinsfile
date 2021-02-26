@@ -31,6 +31,7 @@ pipeline {
                     docker.withRegistry('', registryCredential){
                         sh "docker build -t ${registry} ."
                         sh "docker push ${registry}:latest"
+                        sh "docker push ${registry}:${currentBuild.number}"
                     }
                 }
             }
@@ -55,7 +56,7 @@ pipeline {
                 }
             steps {
                     sh 'kubectl apply -f /home/vagrant/my-app-dev.yaml -n development'
-                    sh 'kubectl set image deployment/my-app my-app=konstantinnn/my-app -n development'
+                    sh "kubectl set image deployment/my-app my-app=konstantinnn/my-app:${currentBuild.number} -n development"
                     sh 'kubectl get pods -n development'           
             }
         }
